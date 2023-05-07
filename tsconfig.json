@@ -1,6 +1,20 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "target": "es6",
+    "module": "esnext",
+    "paths": {
+      "@components": ["./components"],
+      "@navigation": ["./navigation"],
+      "@screens": ["./screens"],
+      "@constants": ["./configs"],
+      "@configs/*": ["./configs/*"],
+      "@services": ["./services"],
+      "@hooks": ["./hooks"],
+      "@redux/*": ["./redux/*"],
+      "@helpers": ["./helpers"],
+      "@icons/*": ["./assets/icons/MingCute/svg/*"]
+    }
   }
 }
