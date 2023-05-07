@@ -8,11 +8,10 @@
       "@components": ["./components"],
       "@navigation": ["./navigation"],
       "@screens": ["./screens"],
-      "@constants": ["./configs"],
-      "@configs/*": ["./configs/*"],
+      "@constants": ["./constants"],
       "@services": ["./services"],
       "@hooks": ["./hooks"],
-      "@redux/*": ["./redux/*"],
+      "@contexts": ["./contexts"],
       "@helpers": ["./helpers"],
       "@icons/*": ["./assets/icons/MingCute/svg/*"]
     }
