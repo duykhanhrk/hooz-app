@@ -10,7 +10,10 @@ export default function AppNavigation() {
   const AppTheme = {dark: true, colors: {background: ColorScheme.primaryColor}};
 
   return (
-    <NavigationContainer theme={AppTheme as typeof DefaultTheme} fallback={<LoadingScreen />}>
+    <NavigationContainer
+      theme={AppTheme as typeof DefaultTheme}
+      fallback={<LoadingScreen />}
+    >
       {session.tokens ? <AppStack /> : <SessionStack />}
     </NavigationContainer>
   );

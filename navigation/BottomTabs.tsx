@@ -1,5 +1,5 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ColorScheme } from '@constants';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {ColorScheme} from '@constants';
 import HomeLineIcon from '@icons/home_3_line.svg';
 import HomeFillIcon from '@icons/home_3_fill.svg';
 import SearchLineIcon from '@icons/search_line.svg';
@@ -22,26 +22,35 @@ export default function BottomTabs() {
         },
         tabBarActiveTintColor: ColorScheme.themeColor,
         tabBarInactiveTintColor: ColorScheme.textColor,
-        tabBarLabelStyle: { marginBottom: 2 },
-      }}>
+        tabBarLabelStyle: {marginBottom: 2}
+      }}
+    >
       <Tab.Screen
         options={{
           title: 'Trang chủ',
           tabBarIcon: ({focused}) => {
             return (
               <>
-                {
-                  focused ?
-                    <HomeFillIcon height={24} width={24} fill={ColorScheme.themeColor} />
-                    :
-                    <HomeLineIcon height={24} width={24} fill={ColorScheme.textColor} />
-                }
+                {focused ? (
+                  <HomeFillIcon
+                    height={24}
+                    width={24}
+                    fill={ColorScheme.themeColor}
+                  />
+                ) : (
+                  <HomeLineIcon
+                    height={24}
+                    width={24}
+                    fill={ColorScheme.textColor}
+                  />
+                )}
               </>
             );
           }
         }}
         name="HomeStack"
-        component={HomeScreen}/>
+        component={HomeScreen}
+      />
 
       <Tab.Screen
         options={{
@@ -49,18 +58,26 @@ export default function BottomTabs() {
           tabBarIcon: ({focused}) => {
             return (
               <>
-                {
-                  focused ?
-                    <SearchFillIcon height={24} width={24} fill={ColorScheme.themeColor} />
-                    :
-                    <SearchLineIcon height={24} width={24} fill={ColorScheme.textColor} />
-                }
+                {focused ? (
+                  <SearchFillIcon
+                    height={24}
+                    width={24}
+                    fill={ColorScheme.themeColor}
+                  />
+                ) : (
+                  <SearchLineIcon
+                    height={24}
+                    width={24}
+                    fill={ColorScheme.textColor}
+                  />
+                )}
               </>
             );
           }
         }}
         name="CategoryStack"
-        component={SearchScreen} />
+        component={SearchScreen}
+      />
 
       <Tab.Screen
         options={{
@@ -68,18 +85,26 @@ export default function BottomTabs() {
           tabBarIcon: ({focused}) => {
             return (
               <>
-                {
-                  focused ?
-                    <UserFillIcon height={24} width={24} fill={ColorScheme.themeColor} />
-                    :
-                    <UserLineIcon height={24} width={24} fill={ColorScheme.textColor} />
-                }
+                {focused ? (
+                  <UserFillIcon
+                    height={24}
+                    width={24}
+                    fill={ColorScheme.themeColor}
+                  />
+                ) : (
+                  <UserLineIcon
+                    height={24}
+                    width={24}
+                    fill={ColorScheme.textColor}
+                  />
+                )}
               </>
             );
           }
         }}
         name="UserStack"
-        component={UserScreen} />
+        component={UserScreen}
+      />
     </Tab.Navigator>
   );
 }

@@ -9,7 +9,10 @@ const axiosInstance = axios.create({
   }
 });
 
-export async function signUpAsync(signUpParams: SignUpParams, exponentToken?: string) {
+export async function signUpAsync(
+  signUpParams: SignUpParams,
+  exponentToken?: string
+) {
   const response = await axiosInstance.post('/sessions/sign_up', signUpParams, {
     headers: {
       'Exponent-Token': exponentToken
@@ -19,7 +22,10 @@ export async function signUpAsync(signUpParams: SignUpParams, exponentToken?: st
   return response.data.data;
 }
 
-export async function signInAsync(signInParams: SignInParams, exponentToken?: string) {
+export async function signInAsync(
+  signInParams: SignInParams,
+  exponentToken?: string
+) {
   const response = await axiosInstance.post('/sessions/sign_in', signInParams, {
     headers: {
       'Exponent-Token': exponentToken
@@ -30,36 +36,58 @@ export async function signInAsync(signInParams: SignInParams, exponentToken?: st
 }
 
 export async function signOutAsync(tokens: Tokens) {
-  await axiosInstance.post('/sessions/sign_out', {}, {
-    headers: {
-      'Authorization': `Bearer ${tokens.access_token}`,
-      'Refresh-Token': tokens.refresh_token
+  await axiosInstance.post(
+    '/sessions/sign_out',
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${tokens.access_token}`,
+        'Refresh-Token': tokens.refresh_token
+      }
     }
-  });
+  );
 
-  return { access_token: null, refresh_token: null };
+  return {access_token: null, refresh_token: null};
 }
 
 export async function sendVerificationCode(email: string) {
-  const response = await axiosInstance.post('/sessions/send_verification_code', {email});
+  const response = await axiosInstance.post(
+    '/sessions/send_verification_code',
+    {email}
+  );
 
   return response.data.data;
 }
 
-export async function resetPassword(email: string, verification_code: string, password: string) {
-  const response = await axiosInstance.post('/sessions/reset_password', {email, verification_code, password});
-
-  return response.data.data;
-}
-
-export async function refreshTokensAsync(tokens: Tokens, exponentToken?: string) {
-  const response = await axiosInstance.post('/sessions/refresh', {}, {
-    headers: {
-      'Authorization': `Bearer ${tokens.access_token}`,
-      'Refresh-Token': tokens.refresh_token,
-      'Exponent-Token': exponentToken
-    }
+export async function resetPassword(
+  email: string,
+  verification_code: string,
+  password: string
+) {
+  const response = await axiosInstance.post('/sessions/reset_password', {
+    email,
+    verification_code,
+    password
   });
+
+  return response.data.data;
+}
+
+export async function refreshTokensAsync(
+  tokens: Tokens,
+  exponentToken?: string
+) {
+  const response = await axiosInstance.post(
+    '/sessions/refresh',
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${tokens.access_token}`,
+        'Refresh-Token': tokens.refresh_token,
+        'Exponent-Token': exponentToken
+      }
+    }
+  );
 
   return response.data.data;
 }

@@ -1,9 +1,9 @@
-import {View, StyleSheet} from "react-native";
+import {View, StyleSheet} from 'react-native';
 import {ColorScheme, Dimensions} from '@constants';
-import {Button, ITextInput, Text, TextInput} from "@components";
-import {useState} from "react";
-import {useSession} from "@hooks";
-import {SignInParams} from "@services";
+import {Button, ITextInput, Text, TextInput} from '@components';
+import {useState} from 'react';
+import {useSession} from '@hooks';
+import {SignInParams} from '@services';
 import MailIcon from '@icons/mail_line.svg';
 import KeyIcon from '@icons/key_1_line.svg';
 
@@ -17,7 +17,9 @@ export default function SignInScreen() {
         <Text style={styles.logo}>HOOZ</Text>
         <ITextInput
           style={styles.part}
-          icon={<MailIcon height={20} width={20} fill={ColorScheme.themeColor} />}
+          icon={
+            <MailIcon height={20} width={20} fill={ColorScheme.themeColor} />
+          }
           textInput={{
             placeholder: 'Email',
             value: params.email,
@@ -26,7 +28,9 @@ export default function SignInScreen() {
         />
         <ITextInput
           style={styles.part}
-          icon={<KeyIcon height={20} width={20} fill={ColorScheme.themeColor} />}
+          icon={
+            <KeyIcon height={20} width={20} fill={ColorScheme.themeColor} />
+          }
           textInput={{
             placeholder: 'Mật khẩu',
             secureTextEntry: true,
@@ -50,7 +54,7 @@ export default function SignInScreen() {
         </View>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

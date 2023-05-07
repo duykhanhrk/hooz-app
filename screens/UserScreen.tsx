@@ -1,11 +1,8 @@
-import {View, StyleSheet} from "react-native";
+import {View, StyleSheet} from 'react-native';
 import {ColorScheme} from '@constants';
 
 export default function UserScreen() {
-  return (
-    <View style={styles.container}>
-    </View>
-  )
+  return <View style={styles.container}></View>;
 }
 
 const styles = StyleSheet.create({

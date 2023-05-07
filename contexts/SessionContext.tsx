@@ -1,20 +1,20 @@
-import React, {useEffect} from "react";
-import {LoadingScreen} from "@components";
-import {SessionService} from "@services";
-import {TokensHelper} from "@helpers";
-import {isAxiosError} from "axios";
-import {Alert} from "react-native";
+import React, {useEffect} from 'react';
+import {LoadingScreen} from '@components';
+import {SessionService} from '@services';
+import {TokensHelper} from '@helpers';
+import {isAxiosError} from 'axios';
+import {Alert} from 'react-native';
 
 export interface Tokens {
   access_token: string;
   refresh_token: string;
-};
+}
 
 interface SessionPayLoad {
-  tokens: null | Tokens,
-  signUp: (email: string, password: string) => Promise<void>,
-  signIn: (email: string, password: string) => Promise<void>,
-  signOut: () => Promise<void>
+  tokens: null | Tokens;
+  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 export const SessionContext = React.createContext<SessionPayLoad>({
@@ -24,10 +24,12 @@ export const SessionContext = React.createContext<SessionPayLoad>({
   signOut: async () => {}
 });
 
-
 export const SessionProvider = ({children}: {children: React.ReactNode}) => {
   const [tokens, setTokens] = React.useState<null | Tokens>(null);
-  const [status, setStatus] = React.useState<{isLoading: boolean, isError: boolean}>({isLoading: false, isError: false});
+  const [status, setStatus] = React.useState<{
+    isLoading: boolean;
+    isError: boolean;
+  }>({isLoading: false, isError: false});
 
   const signUp = async (email: string, password: string) => {
     setStatus({isLoading: true, isError: false});
@@ -51,7 +53,7 @@ export const SessionProvider = ({children}: {children: React.ReactNode}) => {
     } finally {
       setStatus({isLoading: false, isError: false});
     }
-  }
+  };
 
   const signIn = async (email: string, password: string) => {
     setStatus({isLoading: true, isError: false});
@@ -75,7 +77,7 @@ export const SessionProvider = ({children}: {children: React.ReactNode}) => {
     } finally {
       setStatus({isLoading: false, isError: false});
     }
-  }
+  };
 
   const signOut = async () => {
     setStatus({isLoading: true, isError: false});
@@ -90,7 +92,7 @@ export const SessionProvider = ({children}: {children: React.ReactNode}) => {
       setTokens(null);
       setStatus({isLoading: false, isError: false});
     }
-  }
+  };
 
   const trySignIn = async () => {
     setStatus({isLoading: true, isError: false});
@@ -114,10 +116,10 @@ export const SessionProvider = ({children}: {children: React.ReactNode}) => {
           setStatus({isLoading: false, isError: true});
         }
       } else {
-          setStatus({isLoading: false, isError: true});
+        setStatus({isLoading: false, isError: true});
       }
     }
-  }
+  };
 
   useEffect(() => {
     trySignIn();
@@ -125,10 +127,13 @@ export const SessionProvider = ({children}: {children: React.ReactNode}) => {
 
   return (
     <SessionContext.Provider value={{tokens, signUp, signIn, signOut}}>
-      {status.isError ? <LoadingScreen />
-        : status.isLoading ? <LoadingScreen />
-        : children
-      }
+      {status.isError ? (
+        <LoadingScreen />
+      ) : status.isLoading ? (
+        <LoadingScreen />
+      ) : (
+        children
+      )}
     </SessionContext.Provider>
   );
 };

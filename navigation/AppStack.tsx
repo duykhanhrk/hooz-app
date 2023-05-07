@@ -25,18 +25,30 @@ export default function AppStack() {
               style={{padding: 0}}
               onPress={() => navigation.goBack(null)}
             >
-              <View style={{height: 40, width: 44, alignItems: 'center', justifyContent: 'center'}}>
-                <LeftIcon height={28} width={28} fill={ColorScheme.themeColor} />
+              <View
+                style={{
+                  height: 40,
+                  width: 44,
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <LeftIcon
+                  height={28}
+                  width={28}
+                  fill={ColorScheme.themeColor}
+                />
               </View>
             </TouchableOpacity>
           );
         }
-      })
-    }>
+      })}
+    >
       <Stack.Screen
         options={{headerShown: false}}
         name="BottomTabs"
-        component={BottomTabs} />
+        component={BottomTabs}
+      />
     </Stack.Navigator>
   );
 }

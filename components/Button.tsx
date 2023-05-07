@@ -1,6 +1,13 @@
-import { StyleSheet, TextStyle, TouchableOpacity, Text, TouchableOpacityProps, ColorValue } from 'react-native';
-import { ColorScheme, Dimensions } from '@constants';
-import RightIcon from '@icons/right_line.svg'
+import {
+  StyleSheet,
+  TextStyle,
+  TouchableOpacity,
+  Text,
+  TouchableOpacityProps,
+  ColorValue
+} from 'react-native';
+import {ColorScheme, Dimensions} from '@constants';
+import RightIcon from '@icons/right_line.svg';
 
 export interface ButtonProps extends TouchableOpacityProps {
   type?: 'primary' | 'secondary' | 'icon';
@@ -20,38 +27,49 @@ export default function Button(props: ButtonProps) {
     titleStyle,
     showMoreIcon,
     moreIconColor,
-    ...otherProps } = props;
+    ...otherProps
+  } = props;
 
   return (
     <TouchableOpacity
       activeOpacity={0.9}
       style={[
         styles.container,
-        type && type === 'secondary' ? styles.secondary : type === 'icon' ? styles.icon : styles.primary,
+        type && type === 'secondary'
+          ? styles.secondary
+          : type === 'icon'
+          ? styles.icon
+          : styles.primary,
         style
       ]}
       {...otherProps}
     >
       {icon ? icon : null}
-      {title ?
+      {title ? (
         <Text
           style={[
             styles.title,
-            { flex: showMoreIcon ? 1 : undefined },
-            { marginLeft: icon ? Dimensions.margin : 0 },
+            {flex: showMoreIcon ? 1 : undefined},
+            {marginLeft: icon ? Dimensions.margin : 0},
             titleStyle
           ]}
-        >{title}</Text>
-        :
-        null
-      }
-      { showMoreIcon ? <RightIcon height={20} width={20} fill={moreIconColor || ColorScheme.themeColor} /> : null }
+        >
+          {title}
+        </Text>
+      ) : null}
+      {showMoreIcon ? (
+        <RightIcon
+          height={20}
+          width={20}
+          fill={moreIconColor || ColorScheme.themeColor}
+        />
+      ) : null}
       {props.children}
     </TouchableOpacity>
   );
 }
 
-const styles =  StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: Dimensions.height,
     borderRadius: Dimensions.borderRadius,

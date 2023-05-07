@@ -1,5 +1,11 @@
 import React, {ComponentProps} from 'react';
-import {StyleSheet, TextInput as _TextInput, ViewProps, TextInputProps as _TextInputProps, View} from 'react-native';
+import {
+  StyleSheet,
+  TextInput as _TextInput,
+  ViewProps,
+  TextInputProps as _TextInputProps,
+  View
+} from 'react-native';
 import {ColorScheme, Dimensions} from '@constants';
 
 interface ITextInputProps extends ViewProps {
@@ -8,14 +14,12 @@ interface ITextInputProps extends ViewProps {
 }
 
 export default function EditText(props: ITextInputProps) {
-  const {style, textInput, ...otherProps } = props;
+  const {style, textInput, ...otherProps} = props;
   const {style: textInputStyle, ...otherTextInputProps} = textInput || {};
 
   return (
     <View style={[styles.container, style]} {...otherProps}>
-      <View style={styles.iconContainer}>
-        {props.icon}
-      </View>
+      <View style={styles.iconContainer}>{props.icon}</View>
       <_TextInput
         selectionColor={ColorScheme.themeColor}
         placeholderTextColor={ColorScheme.placeHolderColor}

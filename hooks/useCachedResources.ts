@@ -18,5 +18,5 @@ export default function useCachedResources() {
     loadResourcesAndDataAsync();
   }, []);
 
-  return { isLoading };
+  return {isLoading};
 }

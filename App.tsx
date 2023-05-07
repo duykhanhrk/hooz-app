@@ -8,10 +8,10 @@ import {ColorScheme} from '@constants';
 import {LoadingScreen} from '@components';
 import AppNavigation from './navigation/AppNavigation';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 export default function App() {
-  const { isLoading } = useCachedResources();
+  const {isLoading} = useCachedResources();
 
   if (isLoading) {
     return <LoadingScreen />;

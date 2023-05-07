@@ -1,7 +1,5 @@
 import * as SessionService from './SessionService';
 
-export {
-  SessionService
-}
+export {SessionService};
 
 export * from './Types';

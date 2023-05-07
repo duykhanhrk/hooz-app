@@ -9,11 +9,14 @@ export interface LoadingScreenProps extends ViewProps {
 }
 
 export default function LoadingScreen(props: LoadingScreenProps) {
-  const { style, color, size, ...otherProps } = props;
+  const {style, color, size, ...otherProps} = props;
 
   return (
     <View style={[styles.container, style]} {...otherProps}>
-      <ActivityIndicator size={size || 'large'} color={color || ColorScheme.themeColor} />
+      <ActivityIndicator
+        size={size || 'large'}
+        color={color || ColorScheme.themeColor}
+      />
     </View>
   );
 }

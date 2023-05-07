@@ -9,7 +9,7 @@ const Stack = createStackNavigator<SessionStackParamList>();
 
 export default function AuthStack() {
   return (
-    <Stack.Navigator 
+    <Stack.Navigator
       screenOptions={({navigation}) => ({
         headerShown: false,
         headerTintColor: ColorScheme.textColor,
@@ -26,8 +26,19 @@ export default function AuthStack() {
               style={{padding: 0}}
               onPress={() => navigation.goBack(null)}
             >
-              <View style={{height: 40, width: 44, alignItems: 'center', justifyContent: 'center'}}>
-                <LeftIcon height={28} width={28} fill={ColorScheme.themeColor} />
+              <View
+                style={{
+                  height: 40,
+                  width: 44,
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <LeftIcon
+                  height={28}
+                  width={28}
+                  fill={ColorScheme.themeColor}
+                />
               </View>
             </TouchableOpacity>
           );

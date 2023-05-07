@@ -2,10 +2,10 @@ import React, {ComponentProps} from 'react';
 import {StyleSheet, TextInput as _TextInput} from 'react-native';
 import {ColorScheme, Dimensions} from '@constants';
 
-export type TextInputProps = ComponentProps<typeof _TextInput>
+export type TextInputProps = ComponentProps<typeof _TextInput>;
 
 export default function EditText(props: TextInputProps) {
-  const { style, ...otherProps } = props;
+  const {style, ...otherProps} = props;
 
   return (
     <_TextInput
