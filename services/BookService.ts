@@ -18,12 +18,8 @@ export const getReadAsync = (params: {page?: number, per_page?: number}) => {
   return ApiService.get('/app/books/read', {params: {per_page: 20, ...params}});
 }
 
-export const likeAsync = (id: number, like: boolean) => {
-  return like ? ApiService.post(`/app/books/${id}/like`) : ApiService.post(`/app/books/${id}/unlike`);
-}
-
-export const followAsync = (id: number, follow: boolean) => {
-  return follow ? ApiService.post(`/app/books/${id}/follow`) : ApiService.post(`/app/books/${id}/unfollow`);
+export const favoriteAsync = (id: number, like: boolean) => {
+  return like ? ApiService.post(`/app/books/${id}/favorite`) : ApiService.delete(`/app/books/${id}/unfavorite`);
 }
 
 export const getChapterAsync = (chapter_id: number) => ApiService.get(`/app/chapters/${chapter_id}`);

@@ -5,7 +5,7 @@ import {ColorScheme, Dimensions} from '@constants';
 import {AppStackParamList} from "../navigation/Types";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {BookService} from "@services";
-import {useCallback, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import BookItem from "../components/BookItem";
 import LoadingScreen from "../components/LoadingScreen";
 import ErrorScreen from "../components/ErrorScreen";
@@ -33,6 +33,14 @@ export default function FavoritedBooksScreen() {
       query.fetchNextPage();
     }
   }
+
+  useEffect(() => {
+    const willFocusSubscription = navigation.addListener('focus', () => {
+      query.refetch();
+    });
+
+    return willFocusSubscription;
+  }, [navigation]);
 
   const books = useMemo(() => query.data?.pages.flatMap(page => page.books), [query.data])
 

@@ -1,6 +1,6 @@
-import {View, StyleSheet, ScrollView, Image, ImageBackground, TouchableOpacity} from "react-native"
+import {View, StyleSheet, ScrollView, Image, ImageBackground, TouchableOpacity, Alert} from "react-native"
 import {ColorScheme, Dimensions} from "@constants";
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery} from "@tanstack/react-query";
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
@@ -28,6 +28,11 @@ export default function BookScreen() {
     onSuccess: (data) => {
       setBook(data.book);
     }
+  });
+
+  const favorite = useMutation({
+    mutationFn: () => BookService.favoriteAsync(book_id, !book?.favorited),
+    onSettled: () => query.refetch()
   });
 
   if (query.isLoading) {
@@ -68,10 +73,24 @@ export default function BookScreen() {
             title="Yêu thích"
             titleStyle={{color: book?.favorited ? ColorScheme.themeColor : ColorScheme.textColor}}
             type="secondary"
+            onPress={() => favorite.mutate()}
           />
           <Button
             style={{flex: 1, marginLeft: 4, marginVertical: 8, width: 180}}
             title={book?.reading_chapter ? 'Đọc tiếp' : 'Đọc ngay'}
+            onPress={() => {
+              if (book?.chapters?.length === 0) {
+                Alert.alert('Thông báo', 'Sách chưa có chương nào');
+                return;
+              }
+
+              let chapter_id = book?.chapters?.at(0)?.id!;
+              if (book?.reading_chapter) {
+                chapter_id = book?.reading_chapter.id;
+              }
+
+              navigation.navigate('ReadingScreen', {title: book?.reading_chapter?.name, chapter_id, book_id})
+            }}
           />
         </View>
       </View>

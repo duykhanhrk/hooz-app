@@ -54,7 +54,7 @@ export type Book = {
   liked?: boolean;
   categories?: Array<Category>;
   chapters?: Array<Chapter>;
-  favourited?: boolean;
+  favorited?: boolean;
   reading_chapter?: null | Chapter;
 }
 
