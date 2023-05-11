@@ -1,15 +1,52 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
 import {ColorScheme, Dimensions} from '@constants';
-import {Button, ITextInput, Text, TextInput} from '@components';
+import {Button, ITextInput, LoadingScreen, Text} from '@components';
 import {useState} from 'react';
-import {useSession} from '@hooks';
-import {SignInParams} from '@services';
+import {SessionService, SignInParams} from '@services';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {SessionStackParamList} from '@navigation';
 import MailIcon from '@icons/mail_line.svg';
 import KeyIcon from '@icons/key_1_line.svg';
+import {TokensHelper} from '@helpers';
+import {useAppDispatch} from '@hooks';
+import {setTokens} from '@redux/sessionSlide';
+import {isAxiosError} from 'axios';
 
 export default function SignInScreen() {
   const [params, setParams] = useState<SignInParams>({email: '', password: ''});
-  const session = useSession();
+  const [signingIn, setSigningIn] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<StackNavigationProp<SessionStackParamList, 'SignInScreen'>>();
+
+  const signIn = async () => {
+    setSigningIn(true);
+
+    try {
+      const _tokens = await SessionService.signInAsync(params);
+
+      await TokensHelper.setTokensAsync(_tokens);
+
+      dispatch(setTokens(_tokens));
+    } catch (error) {
+      if (isAxiosError(error)) {
+        if (error.response) {
+          Alert.alert('Lỗi', error.response.data.message);
+        } else {
+          Alert.alert('Lỗi', 'Vui lòng kiểm tra lại kết nối mạng');
+        }
+      } else {
+        Alert.alert('Lỗi', 'Vui lòng kiểm tra lại kết nối mạng');
+      }
+    }
+
+    setSigningIn(false);
+  };
+
+  if (signingIn) {
+    return <LoadingScreen />
+  }
 
   return (
     <View style={styles.container}>
@@ -39,17 +76,17 @@ export default function SignInScreen() {
           }}
         />
         <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-          <Text style={[styles.part, styles.link]}>Quên mật khẩu?</Text>
+          <Text style={[styles.part, styles.link]} onPress={() => navigation.navigate('SendVerificationCodeScreen')}>Quên mật khẩu?</Text>
         </View>
         <Button
           style={styles.part}
           title="Đăng nhập"
           type="primary"
-          onPress={() => session.signIn(params.email, params.password)}
+          onPress={signIn}
         />
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text style={styles.part}>
-            Bạn chưa có tài khoản? <Text style={styles.link}>đăng ký ngay</Text>
+            Bạn chưa có tài khoản? <Text style={styles.link} onPress={() => navigation.navigate('SignUpScreen')}>đăng ký ngay</Text>
           </Text>
         </View>
       </View>

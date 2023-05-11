@@ -12,11 +12,10 @@
           "@screens": "./screens",
           "@constants": "./constants",
           "@services": "./services",
-          "@contexts": "./contexts",
           "@hooks": "./hooks",
-          "@redux": "./redux",
           "@helpers": "./helpers",
-          "@icons": "./assets/icons/MingCute/svg"
+          "@icons": "./assets/icons/MingCute/svg",
+          "@redux": "./redux"
         }
       }
     ]

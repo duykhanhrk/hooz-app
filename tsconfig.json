@@ -11,9 +11,9 @@
       "@constants": ["./constants"],
       "@services": ["./services"],
       "@hooks": ["./hooks"],
-      "@contexts": ["./contexts"],
       "@helpers": ["./helpers"],
-      "@icons/*": ["./assets/icons/MingCute/svg/*"]
+      "@icons/*": ["./assets/icons/MingCute/svg/*"],
+      "@redux/*": ["./redux/*"]
     }
   }
 }

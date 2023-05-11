@@ -19,7 +19,7 @@ const Dimensions = {
   padding: 8,
   borderRadius: 8,
   fontSize: 16,
-  iconSize: 20
+  iconSize: 24
 };
 
 export default Dimensions;

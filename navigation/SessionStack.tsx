@@ -1,6 +1,6 @@
 import {ColorScheme} from '@constants';
 import {createStackNavigator} from '@react-navigation/stack';
-import {SignInScreen, SignUpScreen} from '@screens';
+import {ResetPasswordScreen, SendVerificationCodeScreen, SignInScreen, SignUpScreen} from '@screens';
 import {TouchableOpacity, View} from 'react-native';
 import {SessionStackParamList} from './Types';
 import LeftIcon from '@icons/arrow_left_line.svg';
@@ -47,6 +47,16 @@ export default function AuthStack() {
     >
       <Stack.Screen name="SignInScreen" component={SignInScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+      <Stack.Screen
+        options={{headerShown: true, title: 'Lấy mã xác thực'}}
+        name="SendVerificationCodeScreen"
+        component={SendVerificationCodeScreen}
+      />
+      <Stack.Screen
+        options={{headerShown: true, title: 'Đổi mật khẩu'}}
+        name="ResetPasswordScreen"
+        component={ResetPasswordScreen}
+      />
     </Stack.Navigator>
   );
 }

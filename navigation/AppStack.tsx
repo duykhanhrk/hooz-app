@@ -4,6 +4,9 @@ import {AppStackParamList} from './Types';
 import {ColorScheme} from '@constants';
 import BottomTabs from './BottomTabs';
 import LeftIcon from '@icons/arrow_left_line.svg';
+import {BooksScreen, BookScreen, ChangePasswordScreen, ChangeInfoScreen, FavoritedBooksScreen, PlansScreen, CardPaymentScreen, NotificationScreen, PurchaseHistoryScreen, FeedbackScreen, PolicyAndTermScreen} from '@screens';
+import ReadingScreen from '../screens/ReadingScreen';
+import SearchingScreen from '../screens/SearchingScreen';
 
 const Stack = createStackNavigator<AppStackParamList>();
 
@@ -12,7 +15,7 @@ export default function AppStack() {
     <Stack.Navigator
       screenOptions={({navigation}) => ({
         headerTintColor: ColorScheme.themeColor,
-        headerTitleStyle: {color: ColorScheme.themeColor},
+        headerTitleStyle: {color: ColorScheme.textColor, fontSize: 24, fontWeight: 'bold'},
         headerStyle: {
           backgroundColor: ColorScheme.primaryColor,
           elevation: 0,
@@ -28,7 +31,7 @@ export default function AppStack() {
               <View
                 style={{
                   height: 40,
-                  width: 44,
+                  width: 60,
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}
@@ -36,7 +39,7 @@ export default function AppStack() {
                 <LeftIcon
                   height={28}
                   width={28}
-                  fill={ColorScheme.themeColor}
+                  fill={ColorScheme.textColor}
                 />
               </View>
             </TouchableOpacity>
@@ -48,6 +51,102 @@ export default function AppStack() {
         options={{headerShown: false}}
         name="BottomTabs"
         component={BottomTabs}
+      />
+      <Stack.Screen
+        name="BooksScreen"
+        component={BooksScreen}
+        options={({route}) => ({ title: route.params.title || 'Các sách'})}
+     />
+      <Stack.Screen
+        name="BookScreen"
+        component={BookScreen}
+        options={({route}) => ({
+          title: route.params.title || 'Sách'
+        })}
+      />
+      <Stack.Screen
+        name="ReadingScreen"
+        component={ReadingScreen}
+        options={({route}) => ({
+          title: route.params.title || 'Đọc sách'
+        })}
+      />
+      <Stack.Screen
+        name="SearchingScreen"
+        component={SearchingScreen}
+        options={({route}) => ({
+          headerShown: false
+        })}
+      />
+      <Stack.Screen
+        name="ChangePasswordScreen"
+        component={ChangePasswordScreen}
+        options={{
+          title: 'Đổi mật khẩu'
+        }}
+      />
+      <Stack.Screen
+        name="ChangeInfoScreen"
+        component={ChangeInfoScreen}
+        options={{
+          title: 'Thay đổi thông tin'
+        }}
+      />
+      <Stack.Screen
+        name="FavoritedBooksScreen"
+        component={FavoritedBooksScreen}
+        options={{
+          title: 'Sách yêu thích'
+        }}
+      />
+      <Stack.Screen
+        name="PlansScreen"
+        component={PlansScreen}
+        options={{
+          title: 'Đăng ký gói'
+        }}
+      />
+      <Stack.Screen
+        name="CardPaymentScreen"
+        component={CardPaymentScreen}
+        options={{
+          title: 'Thanh toán'
+        }}
+      />
+      <Stack.Screen
+        name="NotificationScreen"
+        component={NotificationScreen}
+        options={{
+          title: 'Thông báo'
+        }}
+      />
+      <Stack.Screen
+        name="PurchaseHistoryScreen"
+        component={PurchaseHistoryScreen}
+        options={{
+          title: 'Lịch sử đăng ký gói'
+        }}
+      />
+      <Stack.Screen
+        name="FeedbackScreen"
+        component={FeedbackScreen}
+        options={{
+          title: 'Góp ý'
+        }}
+      />
+      <Stack.Screen
+        name="PolicyAndTermScreen"
+        component={PolicyAndTermScreen}
+        options={{
+          title: 'Điều khoản và chính sách'
+        }}
+      />
+      <Stack.Screen
+        name="IntroductionScreen"
+        component={PolicyAndTermScreen}
+        options={{
+          title: 'Giới thiệu'
+        }}
       />
     </Stack.Navigator>
   );

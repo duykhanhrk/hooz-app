@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 
 export async function signUpAsync(
   signUpParams: SignUpParams,
-  exponentToken?: string
+  exponentToken?: string | null
 ) {
   const response = await axiosInstance.post('/sessions/sign_up', signUpParams, {
     headers: {
@@ -24,7 +24,7 @@ export async function signUpAsync(
 
 export async function signInAsync(
   signInParams: SignInParams,
-  exponentToken?: string
+  exponentToken?: string | null
 ) {
   const response = await axiosInstance.post('/sessions/sign_in', signInParams, {
     headers: {
@@ -75,7 +75,7 @@ export async function resetPassword(
 
 export async function refreshTokensAsync(
   tokens: Tokens,
-  exponentToken?: string
+  exponentToken?: string | null
 ) {
   const response = await axiosInstance.post(
     '/sessions/refresh',

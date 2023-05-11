@@ -18,3 +18,7 @@ web-build/
 
 #.env
 .env
+
+# config
+configs/
+android/

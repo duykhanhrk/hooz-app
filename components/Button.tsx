@@ -10,7 +10,7 @@ import {ColorScheme, Dimensions} from '@constants';
 import RightIcon from '@icons/right_line.svg';
 
 export interface ButtonProps extends TouchableOpacityProps {
-  type?: 'primary' | 'secondary' | 'icon';
+  type?: 'primary' | 'secondary' | 'transparent' | 'icon';
   title?: string;
   titleStyle?: TextStyle;
   icon?: React.ReactNode;
@@ -39,6 +39,8 @@ export default function Button(props: ButtonProps) {
           ? styles.secondary
           : type === 'icon'
           ? styles.icon
+          : type === 'transparent'
+          ? styles.transparent
           : styles.primary,
         style
       ]}
@@ -59,9 +61,9 @@ export default function Button(props: ButtonProps) {
       ) : null}
       {showMoreIcon ? (
         <RightIcon
-          height={20}
-          width={20}
-          fill={moreIconColor || ColorScheme.themeColor}
+          height={Dimensions.iconSize}
+          width={Dimensions.iconSize}
+          fill={moreIconColor || ColorScheme.textColor}
         />
       ) : null}
       {props.children}
@@ -85,6 +87,9 @@ const styles = StyleSheet.create({
   },
   secondary: {
     backgroundColor: ColorScheme.secondaryColor
+  },
+  transparent: {
+    backgroundColor: 'transparent'
   },
   icon: {
     backgroundColor: 'transparent',
