@@ -1,9 +1,9 @@
-import {View, StyleSheet, ScrollView, Image} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {ColorScheme, Dimensions} from '@constants';
 import {BookItem, Button, Card, ErrorScreen, LoadingScreen, Text} from '@components';
 import {useQuery} from '@tanstack/react-query';
 import {BookService, Book} from '@services';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AppStackParamList} from '@navigation';
 import {useNavigation} from '@react-navigation/native';
@@ -56,6 +56,14 @@ export default function HomeScreen() {
       setReadingBooks(data.books);
     }
   });
+
+  useEffect(() => {
+    const willFocusSubscription = navigation.addListener('focus', () => {
+      readingBooksQuery.refetch();
+    });
+
+    return willFocusSubscription;
+  }, [navigation]);
 
   if (newestBooksQuery.isLoading || freeBooksQuery.isLoading || mostViewedBooksQuery.isLoading || mostFavoriteBooksQuery.isLoading || readingBooksQuery.isLoading) {
     return <LoadingScreen />

@@ -37,4 +37,5 @@ export type AppStackParamList = {
   FeedbackScreen: undefined;
   PolicyAndTermScreen: undefined;
   IntroductionScreen: undefined;
+  ReadingOptionScreen: undefined;
 };

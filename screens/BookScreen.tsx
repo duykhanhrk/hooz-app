@@ -6,7 +6,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {AppStackParamList} from "@navigation";
 import {Book, BookService} from "@services";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import LoadingScreen from "../components/LoadingScreen";
 import ErrorScreen from "../components/ErrorScreen";
 import Text from "../components/Text";
@@ -14,6 +14,8 @@ import Button from "../components/Button";
 
 import HeartLineIcon from '@icons/heart_line.svg';
 import HeartFillIcon from '@icons/heart_fill.svg';
+import Card from "../components/Card";
+import {Tag} from "@components";
 
 export default function BookScreen() {
   const [book, setBook] = useState<Book>();
@@ -34,6 +36,14 @@ export default function BookScreen() {
     mutationFn: () => BookService.favoriteAsync(book_id, !book?.favorited),
     onSettled: () => query.refetch()
   });
+
+  useEffect(() => {
+    const willFocusSubscription = navigation.addListener('focus', () => {
+      query.refetch();
+    });
+
+    return willFocusSubscription;
+  }, [navigation]);
 
   if (query.isLoading) {
     return <LoadingScreen />
@@ -95,16 +105,20 @@ export default function BookScreen() {
         </View>
       </View>
       <View style={{minHeight: Dimensions.window.height - 118, paddingHorizontal: 16, backgroundColor: ColorScheme.primaryColor}}>
-        <View style={{marginBottom: 8}}>
+        <Card style={{marginBottom: 8}}>
           <Text style={{fontWeight: 'bold', marginBottom: 4}}>{book?.name}</Text>
-          <Text style={{}}>{book?.other_names}</Text>
-          <Text style={{}}>{book?.author}</Text>
-        </View>
-        <View style={{marginBottom: 8}}>
-        <Text style={{fontWeight: 'bold', marginBottom: 4}}>Nội dung</Text>
-        <Text style={{textAlign: 'justify'}}>{book?.description}</Text>
-        </View>
-        <View style={{marginBottom: 8}}>
+          <View style={{flexDirection: 'column', alignItems: 'flex-start'}}>
+            <Text>Tên khác: {book?.other_names}</Text>
+            <Text>Tác giả: {book?.author}</Text>
+            {book?.free && <Text>{'Miễn phí'}</Text>}
+          </View>
+        </Card>
+
+        <Card style={{marginBottom: 8}}>
+          <Text style={{fontWeight: 'bold', marginBottom: 4}}>Nội dung</Text>
+          <Text style={{textAlign: 'justify'}}>{book?.description}</Text>
+        </Card>
+        <Card style={{marginBottom: 8}}>
           <Text style={{fontWeight: 'bold', marginBottom: 4}}>Danh sách chương</Text>
           <View>
             {book?.chapters?.map((chapter, index) => (
@@ -114,17 +128,17 @@ export default function BookScreen() {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  borderBottomColor: ColorScheme.placeHolderColor,
-                  borderBottomWidth: 1,
-                  padding: 8
+                  marginVertical: 4
                 }}
                 onPress={() => navigation.navigate('ReadingScreen', {title: chapter.name, chapter_id: chapter.id, book_id})}
                 >
-                <Text>{chapter.name}</Text>
+                <Card style={{flex: 1, height: 40, justifyContent: 'center'}}>
+                  <Text>{chapter.name}</Text>
+                </Card>
               </TouchableOpacity>
             ))}
           </View>
-        </View>
+        </Card>
       </View>
     </ScrollView>
     </ImageBackground>

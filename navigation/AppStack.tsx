@@ -2,11 +2,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {TouchableOpacity, View} from 'react-native';
 import {AppStackParamList} from './Types';
 import {ColorScheme} from '@constants';
+import {BooksScreen, BookScreen, ChangePasswordScreen, ChangeInfoScreen, FavoritedBooksScreen, PlansScreen, CardPaymentScreen, NotificationScreen, PurchaseHistoryScreen, FeedbackScreen, PolicyAndTermScreen} from '@screens';
 import BottomTabs from './BottomTabs';
 import LeftIcon from '@icons/arrow_left_line.svg';
-import {BooksScreen, BookScreen, ChangePasswordScreen, ChangeInfoScreen, FavoritedBooksScreen, PlansScreen, CardPaymentScreen, NotificationScreen, PurchaseHistoryScreen, FeedbackScreen, PolicyAndTermScreen} from '@screens';
+import SettingIcon from '@icons/settings_2_line.svg';
 import ReadingScreen from '../screens/ReadingScreen';
 import SearchingScreen from '../screens/SearchingScreen';
+import ReadingOptionScreen from '../screens/ReadingOptionScreen';
 
 const Stack = createStackNavigator<AppStackParamList>();
 
@@ -15,7 +17,7 @@ export default function AppStack() {
     <Stack.Navigator
       screenOptions={({navigation}) => ({
         headerTintColor: ColorScheme.themeColor,
-        headerTitleStyle: {color: ColorScheme.textColor, fontSize: 24, fontWeight: 'bold'},
+        headerTitleStyle: {color: ColorScheme.textColor, fontSize: 22, fontWeight: 'bold'},
         headerStyle: {
           backgroundColor: ColorScheme.primaryColor,
           elevation: 0,
@@ -56,7 +58,7 @@ export default function AppStack() {
         name="BooksScreen"
         component={BooksScreen}
         options={({route}) => ({ title: route.params.title || 'Các sách'})}
-     />
+      />
       <Stack.Screen
         name="BookScreen"
         component={BookScreen}
@@ -65,18 +67,47 @@ export default function AppStack() {
         })}
       />
       <Stack.Screen
+        name="ReadingOptionScreen"
+        component={ReadingOptionScreen}
+        options={{
+          title: 'Cài đặt đọc sách'
+        }}
+      />
+      <Stack.Screen
         name="ReadingScreen"
         component={ReadingScreen}
-        options={({route}) => ({
-          title: route.params.title || 'Đọc sách'
+        options={({route, navigation}) => ({
+          title: route.params.title || 'Đọc sách',
+          headerRight: () => (
+            <TouchableOpacity
+              activeOpacity={0.9}
+              style={{padding: 0}}
+              onPress={() => navigation.navigate('ReadingOptionScreen')}
+            >
+              <View
+                style={{
+                  height: 40,
+                  width: 40,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <SettingIcon
+                  height={28}
+                  width={28}
+                  fill={ColorScheme.textColor}
+                />
+              </View>
+            </TouchableOpacity>
+          )
         })}
       />
       <Stack.Screen
         name="SearchingScreen"
         component={SearchingScreen}
-        options={({route}) => ({
+        options={{
           headerShown: false
-        })}
+        }}
       />
       <Stack.Screen
         name="ChangePasswordScreen"

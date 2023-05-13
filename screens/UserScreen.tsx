@@ -10,6 +10,7 @@ import {View} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {AppStackParamList} from "@navigation";
+import {RefreshControl} from 'react-native';
 
 import UserIcon from '@icons/user_2_line.svg';
 import KeyIcon from '@icons/key_1_line.svg';
@@ -20,7 +21,7 @@ import InfoIcon from '@icons/information_line.svg';
 import NotificationIcon from '@icons/notification_line.svg';
 import HistoryIcon from '@icons/history_line.svg';
 import DocumentIcon from '@icons/document_line.svg';
-import {RefreshControl} from 'react-native';
+import SettingIcon from '@icons/settings_2_line.svg';
 
 export default function UserScreen() {
   const [refreshing, setRefreshing] = useState(false);
@@ -152,6 +153,7 @@ export default function UserScreen() {
           :
           <Button
             showMoreIcon
+            style={styles.sessionButton}
             type={'secondary'}
             onPress={() => navigation.navigate('PlansScreen')}
             title={'Đăng ký gói ngay'}
@@ -171,6 +173,15 @@ export default function UserScreen() {
 
       <View style={styles.session}>
         <Text style={styles.sessionTitle}>Hệ thống</Text>
+        <Button
+          showMoreIcon
+          style={styles.sessionButton}
+          type={'secondary'}
+          onPress={() => navigation.navigate('ReadingOptionScreen')}
+          title={'Cài đặt đọc sách'}
+          titleStyle={{fontWeight: 'bold'}}
+          icon={<SettingIcon height={Dimensions.iconSize} width={Dimensions.iconSize} fill={ColorScheme.themeColor} />}
+        />
         <Button
           showMoreIcon
           style={styles.sessionButton}

@@ -6,10 +6,10 @@ import {useCachedResources} from '@hooks';
 import {ColorScheme} from '@constants';
 import {LoadingScreen} from '@components';
 import {Provider} from 'react-redux';
-import store from '@redux/store';
-import AppNavigation from './navigation/AppNavigation';
 import {useEffect} from 'react';
 import {NotifyHelper} from '@helpers';
+import store from '@redux/store';
+import AppNavigation from './navigation/AppNavigation';
 
 const queryClient = new QueryClient();
 

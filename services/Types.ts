@@ -56,6 +56,7 @@ export type Book = {
   chapters?: Array<Chapter>;
   favorited?: boolean;
   reading_chapter?: null | Chapter;
+  free?: boolean;
 }
 
 export type Chapter = {
