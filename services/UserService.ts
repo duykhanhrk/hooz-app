@@ -1,4 +1,5 @@
 import * as ApiService from './ApiService';
+import FormData from 'form-data';
 
 export const getProfile = () => ApiService.get('/app/user');
 
@@ -10,9 +11,13 @@ export const updateAccount = (user: { username?: string, email?: string, passwor
   return ApiService.put('/app/user/change_login_info', { user });
 }
 
-export const updateAvatar = async (avatar: File) => {
+export const updateAvatar = async (uri: string) => {
   const formData = new FormData();
-  formData.append('avatar', avatar);
+  formData.append('avatar', {
+    uri,
+    name: 'image.jpg',
+    type: 'image/jpeg',
+  });
 
   return ApiService.put('/app/user/upload_avatar', formData, {
     headers: {

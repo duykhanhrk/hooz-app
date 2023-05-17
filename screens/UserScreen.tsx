@@ -1,7 +1,7 @@
 import {StyleSheet, Image, ScrollView} from 'react-native';
 import {Dimensions, ColorScheme} from '@constants';
 import {Button, Card, ErrorScreen, LoadingScreen, Text} from '@components';
-import {SessionService, User} from '@services';
+import {SessionService, User, UserService} from '@services';
 import {useCallback, useEffect, useState} from 'react';
 import {TokensHelper} from '@helpers';
 import {useAppSelector, useAppDispatch, useUserProfileQuery} from '@hooks';
@@ -11,6 +11,7 @@ import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {AppStackParamList} from "@navigation";
 import {RefreshControl} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 import UserIcon from '@icons/user_2_line.svg';
 import KeyIcon from '@icons/key_1_line.svg';
@@ -22,6 +23,8 @@ import NotificationIcon from '@icons/notification_line.svg';
 import HistoryIcon from '@icons/history_line.svg';
 import DocumentIcon from '@icons/document_line.svg';
 import SettingIcon from '@icons/settings_2_line.svg';
+import {TouchableOpacity} from 'react-native';
+import {useMutation} from '@tanstack/react-query';
 
 export default function UserScreen() {
   const [refreshing, setRefreshing] = useState(false);
@@ -46,6 +49,24 @@ export default function UserScreen() {
       setRefreshing(false);
     })
   }, []);
+
+  const updateAvatar = useMutation(
+    (avatar: string) => UserService.updateAvatar(avatar),
+    { onSettled: () => {query.refetch()} }
+  )
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      updateAvatar.mutate(result.assets[0].uri);
+    }
+  };
 
   useEffect(() => {
     const willFocusSubscription = navigation.addListener('focus', () => {
@@ -94,7 +115,20 @@ export default function UserScreen() {
     >
       <Card style={styles.session}>
         <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: Dimensions.borderRadius * 2}}>
-          <Image source={{uri: user?.avatar_url}} style={{width: 60, height: 60, borderRadius: 30}} />
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={pickImage}
+          >
+            <Image
+              style={{width: 60, height: 60, borderRadius: 30}}
+              source={
+                query.data.user.avatar_url ?
+                  {uri: query.data.user.avatar_url}
+                  :
+                  require('../assets/icon.png')
+              }
+            />
+          </TouchableOpacity>
           <Text style={[styles.title, {marginLeft: Dimensions.margin * 2}]}>
             {user?.firstname === '' || user?.lastname === '' ? user?.email : `${user?.firstname} ${user?.lastname}`}
           </Text>

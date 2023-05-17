@@ -66,7 +66,7 @@ export default function BookScreen() {
     >
       <View style={{height: Dimensions.window.height / 2, justifyContent: 'center', alignItems: 'center'}}>
       </View>
-      <View style={{backgroundColor: ColorScheme.primaryColor, paddingHorizontal: 16}}>
+      <View style={{backgroundColor: `${ColorScheme.primaryColor}`, paddingHorizontal: 16}}>
         <View
           style={{
             flexDirection: 'row',
@@ -104,21 +104,21 @@ export default function BookScreen() {
           />
         </View>
       </View>
-      <View style={{minHeight: Dimensions.window.height - 118, paddingHorizontal: 16, backgroundColor: ColorScheme.primaryColor}}>
-        <Card style={{marginBottom: 8}}>
-          <Text style={{fontWeight: 'bold', marginBottom: 4}}>{book?.name}</Text>
+      <View style={{minHeight: Dimensions.window.height - 118, paddingHorizontal: 16, backgroundColor: `${ColorScheme.primaryColor}`}}>
+        <View style={{marginBottom: 8}}>
+          {book?.free && <Text>{'Sách miễn phí'}</Text>}
+          <Text style={{fontWeight: 'bold', marginBottom: 4, fontSize: 20}}>{book?.name}</Text>
           <View style={{flexDirection: 'column', alignItems: 'flex-start'}}>
-            <Text>Tên khác: {book?.other_names}</Text>
-            <Text>Tác giả: {book?.author}</Text>
-            {book?.free && <Text>{'Miễn phí'}</Text>}
+            {book?.other_names !== '' && <Text>{book?.other_names}</Text>}
+            {book?.author !== '' && <Text>{book?.author}</Text>}
           </View>
-        </Card>
+        </View>
 
-        <Card style={{marginBottom: 8}}>
+        <View style={{marginBottom: 8}}>
           <Text style={{fontWeight: 'bold', marginBottom: 4}}>Nội dung</Text>
           <Text style={{textAlign: 'justify'}}>{book?.description}</Text>
-        </Card>
-        <Card style={{marginBottom: 8}}>
+        </View>
+        <View style={{marginBottom: 8}}>
           <Text style={{fontWeight: 'bold', marginBottom: 4}}>Danh sách chương</Text>
           <View>
             {book?.chapters?.map((chapter, index) => (
@@ -138,7 +138,7 @@ export default function BookScreen() {
               </TouchableOpacity>
             ))}
           </View>
-        </Card>
+        </View>
       </View>
     </ScrollView>
     </ImageBackground>
