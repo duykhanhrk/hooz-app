@@ -81,7 +81,13 @@ export default function BottomTabs() {
                   }}
                 >
                   <Image
-                    source={{uri: query.data?.user.avatar_url}}
+                    source={
+                      query.data ? query.data.user.avatar_url ? 
+                        {uri: query?.data.user.avatar_url}
+                        : require('../assets/default-avatar.png')
+                        :
+                        require('../assets/default-avatar.png')
+                    }
                     style={{
                       height: 32,
                       width: 32,

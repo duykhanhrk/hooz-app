@@ -25,7 +25,7 @@ import HistoryIcon from '@icons/history_line.svg';
 import DocumentIcon from '@icons/document_line.svg';
 import SettingIcon from '@icons/settings_2_line.svg';
 import {TouchableOpacity} from 'react-native';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 
 export default function UserScreen() {
   const [refreshing, setRefreshing] = useState(false);
@@ -37,6 +37,7 @@ export default function UserScreen() {
   const dispatch = useAppDispatch();
   const {tokens} = useAppSelector(state => state.session);
 
+  const queryClient = useQueryClient();
   const query = useUserProfileQuery();
 
   useEffect(() => {
@@ -86,6 +87,8 @@ export default function UserScreen() {
     } finally {
     }
 
+    queryClient.clear();
+
     await TokensHelper.eraseTokensAsync();
     dispatch(setTokens(null));
 
@@ -126,11 +129,11 @@ export default function UserScreen() {
                 query.data.user.avatar_url ?
                   {uri: query.data.user.avatar_url}
                   :
-                  require('../assets/icon.png')
+                  require('../assets/default-avatar.png')
               }
             />
           </TouchableOpacity>
-          <Text style={[styles.title, {marginLeft: Dimensions.margin * 2}]}>
+          <Text numberOfLines={1} style={[styles.title, {flex: 1, marginLeft: Dimensions.margin * 2}]}>
             {user?.firstname === '' || user?.lastname === '' ? user?.email : `${user?.lastname} ${user?.firstname}`}
           </Text>
         </View>
