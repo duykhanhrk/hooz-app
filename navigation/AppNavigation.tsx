@@ -5,10 +5,11 @@ import {useAppDispatch, useAppSelector} from '@hooks';
 import AppStack from './AppStack';
 import SessionStack from './SessionStack';
 import {useEffect, useState} from 'react';
-import {NotifyHelper, TokensHelper} from '@helpers';
+import {NotifyHelper, ReadingOptionHelper, TokensHelper} from '@helpers';
 import {SessionService} from '@services';
 import {setTokens} from '@redux/sessionSlide';
 import {isAxiosError} from 'axios';
+import {setReadingOption} from '@redux/readingOptionSlide';
 
 export default function AppNavigation() {
   const [status, setStatus] = useState<{

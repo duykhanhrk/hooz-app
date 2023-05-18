@@ -1,6 +1,6 @@
 import {View, StyleSheet, Alert} from "react-native";
 import {ColorScheme, Dimensions} from "@constants";
-import {Button, ITextInput} from "@components";
+import {Button, ITextInput, LoadingScreen} from "@components";
 import {useState} from "react";
 import {UserService} from "@services";
 import {isAxiosError} from "axios";
@@ -14,6 +14,8 @@ export default function ChangePasswordScreen() {
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('');
 
+  const [isloading, setIsLoading] = useState(false);
+
   const navigation = useNavigation<StackNavigationProp<AppStackParamList, 'ChangePasswordScreen'>>();
 
   const resetPassword = async () => {
@@ -21,6 +23,8 @@ export default function ChangePasswordScreen() {
       Alert.alert('Lỗi', 'Mật khẩu nhập lại không khớp');
       return;
     }
+
+    setIsLoading(true);
 
     try {
       await UserService.updateAccount({ password, new_password: newPassword });
@@ -33,6 +37,12 @@ export default function ChangePasswordScreen() {
         Alert.alert('Lỗi', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại kết nối');
       }
     }
+    
+    setIsLoading(false);
+  }
+
+  if (isloading) {
+    return <LoadingScreen />
   }
 
   return (

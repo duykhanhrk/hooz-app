@@ -131,7 +131,7 @@ export default function UserScreen() {
             />
           </TouchableOpacity>
           <Text style={[styles.title, {marginLeft: Dimensions.margin * 2}]}>
-            {user?.firstname === '' || user?.lastname === '' ? user?.email : `${user?.firstname} ${user?.lastname}`}
+            {user?.firstname === '' || user?.lastname === '' ? user?.email : `${user?.lastname} ${user?.firstname}`}
           </Text>
         </View>
         <Button type={'primary'} onPress={signOut} title={'Đăng xuất'} />

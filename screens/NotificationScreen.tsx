@@ -38,7 +38,7 @@ export default function NotificationScreen() {
       }}
     >
       <Text numberOfLines={1} style={{margin: 2, fontWeight: 'bold', fontSize: 16}}>{item.message.title}</Text>
-      <Text numberOfLines={1} style={{margin: 2}}>{item.message.body}</Text>
+      <Text style={{margin: 2}}>{item.message.body}</Text>
       <Text style={{margin: 2}}>{Moment(item.created_at).format('DD/MM/YY HH:mm:ss')}</Text>
     </TouchableOpacity>
   );
