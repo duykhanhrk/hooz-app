@@ -11,6 +11,7 @@ import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {AppStackParamList} from "@navigation";
 import {RefreshControl} from 'react-native';
+import Moment from 'moment';
 import * as ImagePicker from 'expo-image-picker';
 
 import UserIcon from '@icons/user_2_line.svg';
@@ -181,8 +182,8 @@ export default function UserScreen() {
         {user?.current_plan ? 
           <Card style={styles.sessionButton}>
             <Text style={{marginBottom: 8, fontWeight: 'bold'}}>Gói hiện tại</Text>
-            <Text style={{marginBottom: 4}}>Ngày đăng ký: {user?.current_plan.effective_date.toString()}</Text>
-            <Text>Ngày hết hạn: {user?.current_plan.expiry_date.toString()}</Text>
+            <Text style={{marginBottom: 4}}>Ngày đăng ký: {Moment(user?.current_plan.effective_date).format('DD/MM/YYYY HH:mm:ss')}</Text>
+            <Text>Ngày hết hạn: {Moment(user?.current_plan.expiry_date).format('DD/MM/YYYY HH:mm:ss')}</Text>
           </Card>
           :
           <Button

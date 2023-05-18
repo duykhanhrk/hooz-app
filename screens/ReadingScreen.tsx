@@ -23,7 +23,7 @@ export default function PolicyAndTermScreen() {
   })
 
   const html = useMemo(
-    () => `<div style="color: ${readingOption.color}; font-size: ${readingOption.fontSize}px; font-weight: ${readingOption.fontWeight}; text-align: ${readingOption.textAlign}">${query.data ? query.data.chapter.content : ''}</div>`,
+    () => `<div style="padding: 0px 8px; color: ${readingOption.color}; font-size: ${readingOption.fontSize}px; font-weight: ${readingOption.fontWeight}; text-align: ${readingOption.textAlign}">${query.data ? query.data.chapter.content : ''}</div>`,
     [query.data, readingOption]
   );
 
@@ -37,6 +37,8 @@ export default function PolicyAndTermScreen() {
 
   return (
     <WebView
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
       style={{resizeMode: 'cover', flex: 1, backgroundColor: readingOption.backgroundColor}}
       source={{html: html}}
       scalesPageToFit={false}

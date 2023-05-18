@@ -1,6 +1,6 @@
 import * as ApiService from './ApiService';
 
-export const getAllAsync = (params: {page?: number, per_page?: number, category_ids?: string, sort_by?:string}) => {
+export const getAllAsync = (params: {page?: number, per_page?: number, free?: boolean, category_ids?: string, sort_by?:string}) => {
   return ApiService.get('/app/books', {params: {per_page: 20, sort_by: 'created_at-desc', ...params}});
 }
 

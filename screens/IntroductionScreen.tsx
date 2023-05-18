@@ -11,7 +11,7 @@ export default function IntroductionScreen() {
     queryFn: () => DocumentService.getIntroductionAsync()
   })
 
-  const html = useMemo(() => `<div style="color: ${ColorScheme.textColor}">${query.data ? query.data.policy_and_terms.value : ''}</div>`, [query.data]);
+  const html = useMemo(() => `<div style="padding: 0px 8px; color: ${ColorScheme.textColor}">${query.data ? query.data.introduction ? query.data.introduction.value : '' : ''}</div>`, [query.data]);
 
   if (query.isLoading) {
     return <LoadingScreen />

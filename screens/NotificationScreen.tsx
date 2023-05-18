@@ -62,7 +62,7 @@ export default function NotificationScreen() {
   return (
     <FlatList<Notification>
       style={{flex: 1, backgroundColor: ColorScheme.primaryColor}}
-      contentContainerStyle={{paddingHorizontal: 8, paddingVertical: 4}}
+      contentContainerStyle={{paddingHorizontal: 16, paddingVertical: 4}}
       data={notifications}
       renderItem={({item}) => renderNotificationItem({item})}
       keyExtractor={({id}) => id.toString()}

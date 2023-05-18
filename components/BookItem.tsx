@@ -14,8 +14,8 @@ export default function BookItem(props: BookItemProps) {
     <TouchableOpacity activeOpacity={0.9} style={[styles.container, style]} {...rest}>
       <Image source={{uri: data.image_url}} style={{height: 120, width: 90, borderRadius: Dimensions.borderRadius}} />
       <View style={{marginLeft: 8, flex: 1}}>
-        <Text style={{fontWeight: 'bold', marginBottom: 4}}>{data.name}</Text>
-        <Text style={{marginBottom: 4, fontSize: 12}}>{data.author}</Text>
+        <Text numberOfLines={1} style={{fontWeight: 'bold', marginBottom: 4}}>{data.name}</Text>
+        <Text numberOfLines={1} style={{marginBottom: 4, fontSize: 12}}>{data.author}</Text>
         <Text numberOfLines={4} style={{textAlign: 'justify', fontSize: 12}}>{data.description}</Text>
       </View>
     </TouchableOpacity>

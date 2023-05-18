@@ -27,7 +27,7 @@ export default function HomeScreen() {
 
   const freeBooksQuery = useQuery({
     queryKey: ['books', 'free'],
-    queryFn: () => BookService.getAllAsync({per_page: 4}),
+    queryFn: () => BookService.getAllAsync({per_page: 4, free: true}),
     onSuccess: (data) => {
       setFreeBooks(data.books);
     }

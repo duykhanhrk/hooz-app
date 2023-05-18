@@ -34,7 +34,7 @@ export default function ResetPasswordScreen() {
   return (
     <View style={styles.container}>
       <View
-        style={{flex: 1, paddingVertical: 8, paddingHorizontal: 8}}
+        style={{flex: 1, paddingVertical: 8, paddingHorizontal: 16}}
       >
         <TextInput
           style={{marginBottom: 4}}
@@ -54,7 +54,7 @@ export default function ResetPasswordScreen() {
       </View>
       <Button
         type='primary'
-        style={{margin: 8}}
+        style={{margin: 16}}
         title={'Gửi'}
         titleStyle={{fontWeight: 'bold'}}
         onPress={sendFeedback}
