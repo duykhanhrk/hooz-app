@@ -1,4 +1,4 @@
-import {View, StyleSheet, ScrollView, Image, ImageBackground, TouchableOpacity, Alert} from "react-native"
+import {View, StyleSheet, ScrollView, ImageBackground, TouchableOpacity, Alert} from "react-native"
 import {ColorScheme, Dimensions} from "@constants";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -7,15 +7,12 @@ import {RouteProp} from '@react-navigation/native';
 import {AppStackParamList} from "@navigation";
 import {Book, BookService} from "@services";
 import {useEffect, useState} from "react";
+import {Card, Text, Button} from "@components";
 import LoadingScreen from "../components/LoadingScreen";
 import ErrorScreen from "../components/ErrorScreen";
-import Text from "../components/Text";
-import Button from "../components/Button";
 
 import HeartLineIcon from '@icons/heart_line.svg';
 import HeartFillIcon from '@icons/heart_fill.svg';
-import Card from "../components/Card";
-import {Tag} from "@components";
 
 export default function BookScreen() {
   const [book, setBook] = useState<Book>();
@@ -33,7 +30,7 @@ export default function BookScreen() {
   });
 
   const favorite = useMutation({
-    mutationFn: () => BookService.favoriteAsync(book_id, !book?.favorited),
+    mutationFn: () => BookService.favoriteAsync(book_id, !query.data.book.favorited),
     onSettled: () => query.refetch()
   });
 
@@ -83,7 +80,15 @@ export default function BookScreen() {
             title="Yêu thích"
             titleStyle={{color: book?.favorited ? ColorScheme.themeColor : ColorScheme.textColor}}
             type="secondary"
-            onPress={() => favorite.mutate()}
+            onPress={() => {
+              if (book) {
+                setBook({...book, favorited: !book.favorited});
+                favorite.mutateAsync()
+                  .catch(() => {
+                    setBook({...book, favorited: !book.favorited});
+                  });
+              }
+            }}
           />
           <Button
             style={{flex: 1, marginLeft: 4, marginVertical: 8, width: 180}}
