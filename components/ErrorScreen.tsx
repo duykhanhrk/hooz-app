@@ -34,15 +34,14 @@ export default class ErrorScreen extends Component<ErrorScreenProps> {
           :
           null
         }
-        <Button
-          type='secondary'
-          onPress={this.props.onPress || this.props.onButtonPress}
-          style={{
-            width: 120
-          }}
-        >
-          <Text>{this.props.buttonText? this.props.buttonText : 'Tải lại'}</Text>
-        </Button>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Button
+            type='secondary'
+            onPress={this.props.onPress || this.props.onButtonPress}
+          >
+            <Text>{this.props.buttonText? this.props.buttonText : 'Tải lại'}</Text>
+          </Button>
+        </View>
       </View>
     );
   }
