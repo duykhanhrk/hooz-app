@@ -8,7 +8,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {SessionStackParamList} from '@navigation';
 import MailIcon from '@icons/mail_line.svg';
 import KeyIcon from '@icons/key_1_line.svg';
-import {TokensHelper} from '@helpers';
+import {NotifyHelper, TokensHelper} from '@helpers';
 import {useAppDispatch} from '@hooks';
 import {setTokens} from '@redux/sessionSlide';
 import {isAxiosError} from 'axios';
@@ -24,7 +24,7 @@ export default function SignInScreen() {
     setSigningIn(true);
 
     try {
-      const _tokens = await SessionService.signInAsync(params);
+      const _tokens = await SessionService.signInAsync(params, await NotifyHelper.getExpoPushTokenAsync());
 
       await TokensHelper.setTokensAsync(_tokens);
 

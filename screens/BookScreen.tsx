@@ -99,12 +99,12 @@ export default function BookScreen() {
                 return;
               }
 
-              let chapter_id = book?.chapters?.at(0)?.id!;
+              let chapter = book?.chapters?.at(0);
               if (book?.reading_chapter) {
-                chapter_id = book?.reading_chapter.id;
+                chapter = book?.reading_chapter;
               }
 
-              navigation.navigate('ReadingScreen', {title: book?.reading_chapter?.name, chapter_id, book_id})
+              navigation.navigate('ReadingScreen', {title: chapter?.name, chapter_id: chapter?.id!, book_id});
             }}
           />
         </View>

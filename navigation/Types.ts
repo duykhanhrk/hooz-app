@@ -15,6 +15,7 @@ export type AppStackParamList = {
       category_ids?: string;
       sort_by?: string;
       query?: string;
+      free?: boolean;
     }
   };
   BookScreen: {

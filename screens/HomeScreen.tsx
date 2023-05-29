@@ -79,6 +79,7 @@ export default function HomeScreen() {
       showsHorizontalScrollIndicator={false}
       style={styles.container}
     >
+      {readingBooks.length > 0 &&
       <Card style={styles.session}>
         <Text>Sách đang đọc</Text>
         <Text style={styles.sessionTitle}>Dành 15 phút mỗi ngày để đọc sách</Text>
@@ -92,7 +93,7 @@ export default function HomeScreen() {
             />
           ))}
         </View>
-      </Card>
+      </Card>}
 
       <Card style={styles.session}>
         <Text>Sách miễn phí</Text>
@@ -110,7 +111,7 @@ export default function HomeScreen() {
         <Button
           type='transparent'
           title={'Xem thêm'}
-          onPress={() => navigation.navigate('BooksScreen', {title: 'Sách miễn phí', params: {sort_by: 'created_at-desc'}})}
+          onPress={() => navigation.navigate('BooksScreen', {title: 'Sách miễn phí', params: {free: true}})}
         />
       </Card>
 
@@ -150,7 +151,7 @@ export default function HomeScreen() {
         <Button
           type='transparent'
           title={'Xem thêm'}
-          onPress={() => navigation.navigate('BooksScreen', {title: 'Sách được yêu thích nhất', params: {sort_by: 'created_at-desc'}})}
+          onPress={() => navigation.navigate('BooksScreen', {title: 'Sách được yêu thích nhất', params: {sort_by: 'favorites-desc'}})}
         />
       </Card>
 
@@ -170,7 +171,7 @@ export default function HomeScreen() {
         <Button
           type='transparent'
           title={'Xem thêm'}
-          onPress={() => navigation.navigate('BooksScreen', {title: 'Sách được xem nhiều nhất', params: {sort_by: 'created_at-desc'}})}
+          onPress={() => navigation.navigate('BooksScreen', {title: 'Sách được xem nhiều nhất', params: {sort_by: 'views-desc'}})}
         />
       </Card>
     </ScrollView>
